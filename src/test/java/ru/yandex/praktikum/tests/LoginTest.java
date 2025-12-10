@@ -6,9 +6,6 @@ import io.restassured.response.Response;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.praktikum.api.UserApiClient;
 import ru.yandex.praktikum.model.User;
 import ru.yandex.praktikum.model.UserGenerator;
@@ -16,8 +13,6 @@ import ru.yandex.praktikum.pages.ForgotPasswordPage;
 import ru.yandex.praktikum.pages.LoginPage;
 import ru.yandex.praktikum.pages.MainPage;
 import ru.yandex.praktikum.pages.RegisterPage;
-
-import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
 
@@ -30,9 +25,6 @@ public class LoginTest extends BaseTest {
     private UserApiClient userApiClient;
     private User testUser;
     private String accessToken;
-
-    // Локатор кнопки "Оформить заказ" - появляется после успешного входа
-    private final By orderButton = By.xpath("//button[text()='Оформить заказ']");
 
     @Before
     public void setUpTest() {
@@ -58,10 +50,8 @@ public class LoginTest extends BaseTest {
         loginPage.login(testUser.getEmail(), testUser.getPassword());
 
         // ОР: после входа отображается кнопка "Оформить заказ"
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        boolean isLoggedIn = wait.until(ExpectedConditions.visibilityOfElementLocated(orderButton)).isDisplayed();
-
-        assertTrue("Вход не выполнен - кнопка 'Оформить заказ' не отображается", isLoggedIn);
+        assertTrue("Вход не выполнен - кнопка 'Оформить заказ' не отображается",
+                mainPage.isOrderButtonDisplayed());
     }
 
     @Test
@@ -74,10 +64,8 @@ public class LoginTest extends BaseTest {
         loginPage.login(testUser.getEmail(), testUser.getPassword());
 
         // ОР: после входа отображается кнопка "Оформить заказ"
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        boolean isLoggedIn = wait.until(ExpectedConditions.visibilityOfElementLocated(orderButton)).isDisplayed();
-
-        assertTrue("Вход не выполнен - кнопка 'Оформить заказ' не отображается", isLoggedIn);
+        assertTrue("Вход не выполнен - кнопка 'Оформить заказ' не отображается",
+                mainPage.isOrderButtonDisplayed());
     }
 
     @Test
@@ -90,10 +78,8 @@ public class LoginTest extends BaseTest {
         loginPage.login(testUser.getEmail(), testUser.getPassword());
 
         // ОР: после входа отображается кнопка "Оформить заказ"
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        boolean isLoggedIn = wait.until(ExpectedConditions.visibilityOfElementLocated(orderButton)).isDisplayed();
-
-        assertTrue("Вход не выполнен - кнопка 'Оформить заказ' не отображается", isLoggedIn);
+        assertTrue("Вход не выполнен - кнопка 'Оформить заказ' не отображается",
+                mainPage.isOrderButtonDisplayed());
     }
 
     @Test
@@ -106,10 +92,8 @@ public class LoginTest extends BaseTest {
         loginPage.login(testUser.getEmail(), testUser.getPassword());
 
         // ОР: после входа отображается кнопка "Оформить заказ"
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        boolean isLoggedIn = wait.until(ExpectedConditions.visibilityOfElementLocated(orderButton)).isDisplayed();
-
-        assertTrue("Вход не выполнен - кнопка 'Оформить заказ' не отображается", isLoggedIn);
+        assertTrue("Вход не выполнен - кнопка 'Оформить заказ' не отображается",
+                mainPage.isOrderButtonDisplayed());
     }
 
     @After

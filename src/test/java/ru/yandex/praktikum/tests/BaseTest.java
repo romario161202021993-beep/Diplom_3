@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.io.File;
 import java.time.Duration;
 
 public class BaseTest {
@@ -16,17 +17,35 @@ public class BaseTest {
 
     @Before
     public void setUp() {
-        // Настройка WebDriverManager для автоматической загрузки драйвера Chrome
-        WebDriverManager.chromedriver().setup();
+        // Читаем, какой браузер нужно запустить: chrome или yandex
+        String browser = System.getProperty("browser", "chrome").toLowerCase();
 
-        // Опции для Chrome
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
+        if ("chrome".equals(browser)) {
+            // Обычный Google Chrome
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--remote-allow-origins=*");
+            driver = new ChromeDriver(options);
 
-        // Создание драйвера
-        driver = new ChromeDriver(options);
+        } else if ("yandex".equals(browser)) {
+            // Яндекс.Браузер через ChromeDriver
 
-        // Настройки timeouts
+            // 1. Путь к browser.exe Яндекс.Браузера — ПРОВЕРЬ у себя!
+            // Открой свойства ярлыка Яндекс.Браузера и скопируй путь к файлу browser.exe
+            String yandexPath = "C:\\Users\\Kharchenko Family\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe";
+
+            WebDriverManager.chromedriver().setup();
+
+            ChromeOptions options = new ChromeOptions();
+            options.setBinary(new File(yandexPath)); // говорим драйверу использовать бинарник Яндекс.Браузера
+            options.addArguments("--remote-allow-origins=*");
+
+            driver = new ChromeDriver(options);
+
+        } else {
+            throw new IllegalArgumentException("Неизвестный браузер: " + browser + ". Используй chrome или yandex.");
+        }
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
     }

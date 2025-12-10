@@ -1,5 +1,6 @@
 package ru.yandex.praktikum.api;
 
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import ru.yandex.praktikum.model.User;
 
@@ -12,6 +13,7 @@ public class UserApiClient {
     private static final String LOGIN_PATH = "/api/auth/login";
     private static final String USER_PATH = "/api/auth/user";
 
+    @Step("Регистрация пользователя через API")
     public Response register(User user) {
         return given()
                 .header("Content-type", "application/json")
@@ -20,6 +22,7 @@ public class UserApiClient {
                 .post(BASE_URL + REGISTER_PATH);
     }
 
+    @Step("Вход пользователя через API")
     public Response login(User user) {
         return given()
                 .header("Content-type", "application/json")
@@ -28,6 +31,7 @@ public class UserApiClient {
                 .post(BASE_URL + LOGIN_PATH);
     }
 
+    @Step("Удаление пользователя через API")
     public void delete(String accessToken) {
         given()
                 .header("Content-type", "application/json")
