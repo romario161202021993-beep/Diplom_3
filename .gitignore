@@ -47,3 +47,4 @@ src/test/resources/chromedriver/
 
 # Временные файлы Allure
 .allure/
+allure-report/
