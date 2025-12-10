@@ -42,3 +42,12 @@ build/
 
 ### Windows ###
 Thumbs.db
+
+# Драйверы браузеров
+src/test/resources/yandexdriver/
+src/test/resources/chromedriver/
+
+# Allure временные файлы
+target/
+allure-results/
+.allure/
