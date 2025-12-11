@@ -4,10 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-# Allure
-.allure/
-allure-results/
-.allure-*
+# Allure HTML отчёт (не нужен в репозитории)
+allure-report/
 
 ### IntelliJ IDEA ###
 .idea/
@@ -42,3 +40,11 @@ build/
 
 ### Windows ###
 Thumbs.db
+
+# Драйверы браузеров
+src/test/resources/yandexdriver/
+src/test/resources/chromedriver/
+
+# Временные файлы Allure
+.allure/
+allure-results/
